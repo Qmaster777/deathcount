@@ -7,20 +7,26 @@
 </head>
 <body>
     <?php
-    // Инициализация переменной числа
-    $number = 0;
+    $file = 'number.txt';
 
     // Обработка формы при отправке
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Проверка, была ли нажата кнопка +
         if (isset($_POST['plus'])) {
+            $number = file_exists($file) ? (int)file_get_contents($file) : 0;
             $number += 1;
+            file_put_contents($file, $number);
         }
         // Проверка, была ли нажата кнопка -
         elseif (isset($_POST['minus'])) {
+            $number = file_exists($file) ? (int)file_get_contents($file) : 0;
             $number -= 1;
+            file_put_contents($file, $number);
         }
     }
+
+    // Вывод текущего значения
+    $number = file_exists($file) ? (int)file_get_contents($file) : 0;
     ?>
 
     <h1>Число: <?php echo $number; ?></h1>
@@ -32,3 +38,4 @@
     </form>
 </body>
 </html>
+
