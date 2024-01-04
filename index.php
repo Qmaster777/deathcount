@@ -16,12 +16,16 @@
             $number = file_exists($file) ? (int)file_get_contents($file) : 0;
             $number += 1;
             file_put_contents($file, $number);
+            header("Location: ".$_SERVER['PHP_SELF']); // Редирект после POST
+            exit();
         }
         // Проверка, была ли нажата кнопка -
         elseif (isset($_POST['minus'])) {
             $number = file_exists($file) ? (int)file_get_contents($file) : 0;
             $number -= 1;
             file_put_contents($file, $number);
+            header("Location: ".$_SERVER['PHP_SELF']); // Редирект после POST
+            exit();
         }
     }
 
